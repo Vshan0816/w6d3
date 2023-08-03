@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
     def update 
         @user = User.find(params[:id])
-        if @user.update(params.require(:user).permit(:name, :email))
+        if @user.update(params.require(:user).permit(:username))
             redirect_to user_url(@user.id)
         else 
             render json: @user.errors.full_messages, status: :unprocessable_entity
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     end
 
     def create 
-        @user = User.new(params.require(:user).permit(:name, :email))
+        @user = User.new(params.require(:user).permit(:username))
         # replace the `user_attributes_here` with the actual attribute keys
         if @user.save
             redirect_to user_url(@user.id)
