@@ -10,7 +10,7 @@ class ArtworksController < ApplicationController
 
     def update 
         @artwork = Artwork.find(params[:id])
-        if @artwork.update(params.require(:artwork).permit(:title, :image_url, :artist_id))
+        if @artwork.update(artwork_params)
             redirect_to user_url(@artwork.id)
         else 
             render json: @artwork.errors.full_messages, status: :unprocessable_entity
@@ -23,12 +23,17 @@ class ArtworksController < ApplicationController
     end
 
     def create 
-        @artwork = Artwork.new(params.require(:artwork).permit(:title, :image_url, :artist_id))
+        @artwork = Artwork.new(artwork_params)
         # replace the `user_attributes_here` with the actual attribute keys
         if @artwork.save
             redirect_to user_url(@artwork.id)
         else 
             render json: @artwork.errors.full_messages, status: :unprocessable_entity
         end
+    end
+
+    private
+    def artwork_params
+        params.require(:artwork).permit(:title, :image_url, :artist_id)
     end
 end
