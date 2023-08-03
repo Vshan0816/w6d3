@@ -1,6 +1,20 @@
 class CommentsController < ApplicationController
     def index
-        render json: Comment.all
+        if params.has_key?(:user_id)
+            @comment = Comment
+            .select('distinct(comments.body)')
+            .joins(:author, :artwork)
+            .where("comments.author_id = #{params[:user_id]}")
+            render json: @comment
+        elsif params.has_key?(:artwork_id)
+            @comment = Comment
+            .select('distinct(comments.body)')
+            .joins(:author, :artwork)
+            .where("comments.artwork_id = #{params[:artwork_id]}")
+            render json: @comment
+        end
+
+        
     end
 
     def destroy

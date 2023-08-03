@@ -24,4 +24,7 @@
     share7 = ArtworkShare.create(viewer_id: 3, artwork_id: 3 )
     share8 = ArtworkShare.create(viewer_id: 1, artwork_id: 4 )
 
-    comment1 = Comment.create()
+    comment1 = Comment.create(author_id:1, artwork_id:1 , body:"beautiful")
+    comment2 = Comment.create(author_id:1, artwork_id:2 , body:"masterpiece")
+    comment3 = Comment.create(author_id:2, artwork_id:3 , body:"exquisite")
+    comment4 = Comment.create(author_id:3, artwork_id:4 , body:"magnificent")
