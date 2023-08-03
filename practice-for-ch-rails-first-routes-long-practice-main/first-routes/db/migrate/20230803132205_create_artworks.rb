@@ -3,9 +3,9 @@ class CreateArtworks < ActiveRecord::Migration[7.0]
     create_table :artworks do |t|
       t.string :title, null: false
       t.string :image_url, null: false, unique: true 
-      t.index :artist_id, null: false
+      t.references :artist, null: false, foreign_key: {to_table: :users}, index: false
       t.timestamps
     end
-    add_index(:artworks, [:title, :artist_id]), unique: true 
+    add_index :artworks, [:title, :artist_id], unique: true 
   end
 end
