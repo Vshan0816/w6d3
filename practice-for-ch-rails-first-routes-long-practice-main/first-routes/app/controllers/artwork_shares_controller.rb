@@ -5,6 +5,7 @@ class ArtworkSharesController < ApplicationController
 
     def destroy
         @artwork_share = ArtworkShare.find(params[:id])
+        render json: @artwork_share 
         @artwork_share.destroy 
     end 
 
@@ -26,7 +27,7 @@ class ArtworkSharesController < ApplicationController
         @artwork_share = ArtworkShare.new(params.require(:artwork_share).permit(:viewer_id, :artwork_id))
         # replace the `user_attributes_here` with the actual attribute keys
         if @artwork_share.save
-            redirect_to user_url(@artwork_share.id)
+            render json: @artwork_share 
         else 
             render json: @artwork_share.errors.full_messages, status: :unprocessable_entity
         end

@@ -1,6 +1,9 @@
 class ArtworksController < ApplicationController
     def index
-        render json: Artwork.all
+        artwork = Artwork
+        .select('artworks.title')
+        .where("artworks.artist_id = #{params[:user_id]}")
+        render json: artwork
     end
 
     def destroy
