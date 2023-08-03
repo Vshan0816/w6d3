@@ -1,9 +1,8 @@
 class ArtworksController < ApplicationController
+    #select artworks shared with the user
     def index
-        artwork = Artwork
-        .select('artworks.title')
-        .where("artworks.artist_id = #{params[:user_id]}")
-        render json: artwork
+        @artwork = Artwork.artworks_for_user_id(params[:user_id])
+        render json: @artwork
     end
 
     def destroy
@@ -35,6 +34,7 @@ class ArtworksController < ApplicationController
         end
     end
 
+    
     private
     def artwork_params
         params.require(:artwork).permit(:title, :image_url, :artist_id)
