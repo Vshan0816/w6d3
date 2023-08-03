@@ -23,3 +23,5 @@
     share6 = ArtworkShare.create(viewer_id: 2, artwork_id: 3 )
     share7 = ArtworkShare.create(viewer_id: 3, artwork_id: 3 )
     share8 = ArtworkShare.create(viewer_id: 1, artwork_id: 4 )
+
+    comment1 = Comment.create()
